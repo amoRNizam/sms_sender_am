@@ -42,7 +42,7 @@ public class Controller {
         } else return true;
     }
 
-    public void deleteHistory() {
-
+    public boolean deleteHistory() {
+        return true;
     }
 }

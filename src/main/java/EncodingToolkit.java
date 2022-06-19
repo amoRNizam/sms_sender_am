@@ -59,16 +59,16 @@ public class EncodingToolkit {
         StringBuilder decoded = new StringBuilder();
         int length = hex.length();
         for (int i = length; i >= 2; i -= 2) {
-            String twos = hex.substring((i - 2), i);//2 characters at a time on reverse direction
-            binary.append(fromHexTo7BitBinary(twos));//Convert to 8 bit binary
+            String twos = hex.substring((i - 2), i);//2 символа одновременно в обратном направлении
+            binary.append(fromHexTo7BitBinary(twos));//Преобразование в 7-битный двоичный код
         }
         int gsm7Length = GSM7CHARS.length;
         for (int i = binary.length(); i >= 7; i -= 7) {
-            String seven = binary.substring((i - 7), i);//Chop into 7 bits binary in reverse direction
+            String seven = binary.substring((i - 7), i);//Разделим на 7-битный двоичный файл в обратном направлении
             int decimalOfSeven = Integer.parseInt(seven, 2);
             for (int j = 0; j < gsm7Length; j++) {
                 if (GSM7CHARS[j] == decimalOfSeven) {
-                    decoded.append("").append((char) GSM7CHARS[j]);//Do translation
+                    decoded.append("").append((char) GSM7CHARS[j]);
                 }
             }
         }
@@ -77,10 +77,10 @@ public class EncodingToolkit {
 
     private static String fromHexTo7BitBinary(String hex) {
         StringBuilder ret = new StringBuilder();
-        String binary = Integer.toBinaryString(Integer.parseInt(hex, 16));//Convert hex to binary
+        String binary = Integer.toBinaryString(Integer.parseInt(hex, 16));//Преобразуем шестнадцатеричный код в двоичный
         int length = 7 - binary.length();
         for (int i = 0; i < length; i++) {
-            ret.append("0");//Append missing 0's
+            ret.append("0");//Добавим недостающие 0
         }
         ret.append(binary);
         return ret.toString();
@@ -98,9 +98,9 @@ public class EncodingToolkit {
         }
         binary = zeros.toString() + binary;
         length = binary.length();
-        for (int i = length; i >= 7; i -= 7) {//read in reverse direction
-            temp = binary.substring((i - 7), i);//chop into 8 bits
-            int val = Integer.parseInt(temp, 2);//get decimal value of binary
+        for (int i = length; i >= 7; i -= 7) {//считывание в обратном направлении
+            temp = binary.substring((i - 7), i);//разделим на 7 частей
+            int val = Integer.parseInt(temp, 2);//получим десятичное значение двоичного кода
             String code = Integer.toHexString(val);
             if (code.length() < 2) {
                 code = "0" + code;
@@ -116,7 +116,7 @@ public class EncodingToolkit {
         int length = binaryStr.length();
         int appends = 7 - length;
         for (int i = 0; i < appends; i++) {
-            zeros.append("0");//Append missing 0's to make 7 bits
+            zeros.append("0");//Добавим недостающие 0, чтобы получилось 7 бит
         }
         ret = zeros + binaryStr;
         return ret;
