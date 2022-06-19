@@ -2,14 +2,14 @@ package DTO;
 
 public class SendData {
 
-    Long tel_number;
+    String tel_number;
     String textSMS;
 
-    public long getTel_number() {
+    public String getTel_number() {
         return tel_number;
     }
 
-    public void setTel_number(long tel_number) {
+    public void setTel_number(String tel_number) {
         this.tel_number = tel_number;
     }
 

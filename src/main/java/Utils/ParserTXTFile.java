@@ -14,17 +14,17 @@ public class ParserTXTFile {
     // Инициализация логера
     public static final Logger log = Logger.getLogger(ParserTXTFile.class);
 
-    public static SendData read() {
-        String filePath = "src/test/resources/file1_send.txt";
+    public static SendData read(String filePath) {
 
         try {
             File devFile = new File(filePath);
-            Scanner devScanner = new Scanner(devFile);
+            Scanner devScanner = new Scanner(devFile, "UTF-8");
             SendData sendData = new SendData();
             while (devScanner.hasNext()) {
                 String nextLine = devScanner.nextLine();
                 String[] fileData = nextLine.split(";");
-                sendData.setTel_number((Long.parseLong(fileData[0])));
+//                sendData.setTel_number((Long.parseLong(fileData[0])));
+                sendData.setTel_number(fileData[0]);
                 sendData.setTextSMS(fileData[1]);
                 return sendData;
             }
