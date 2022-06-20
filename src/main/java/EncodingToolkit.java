@@ -1,3 +1,5 @@
+import java.io.UnsupportedEncodingException;
+
 public class EncodingToolkit {
 
     static final int[] GSM7CHARS = {
@@ -120,5 +122,20 @@ public class EncodingToolkit {
         }
         ret = zeros + binaryStr;
         return ret;
+    }
+
+    public static String encodeAsUcs2(String messageContent) {
+        byte[] bytes = new byte[0];
+        try {
+            bytes = messageContent.getBytes("UTF-16BE");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X", b));
+        }
+        return sb.toString();
     }
 }
